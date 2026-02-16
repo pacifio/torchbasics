@@ -194,7 +194,7 @@ for epoch in range(epochs):
 	optimizer.zero_grad()
 
 	out = model.forward(input_texts) # [batch, seq_len, n_chars]
-	out = out.transpose(1, 2) # [bathc, n_chars, seq_len]
+	out = out.transpose(1, 2) # [batch, n_chars, seq_len]
 
 	loss = loss_fn(out, labels)
 	loss.backward()
