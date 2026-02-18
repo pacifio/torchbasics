@@ -176,3 +176,25 @@ and the decoder is learning to upscale the dimension
 from encoder so the training data essentially is just itself.
 
 so these are learned compression sort of.
+
+## diffusion and gans
+### gans
+
+GANs use something called a generator and a discriminator architecture, the job
+of the generator is to generate fake data and the discriminator is trained on real data
+and in the training loop the job of the generator is to create fake data until it fools the discriminator
+and because of this the binary cross entropy or classification like loss functions work really well.
+
+### diffs
+it uses conv blocks to create downsampled noises and then trains an UNET predicts noises for upscaling
+so you essentially take an image, apply noise to this, instead of linear it's most likey non linear noise for preversving features and to avoid LR hurting the learning altogethe
+
+## Simple image prediciton mdoels
+
+so I recently built an extremely small 8m parameter model
+it was trained on 40k samples
+and the way it worked was
+
+Images (raw) -> ImageEncoder -> Image features -> Conv blocks + linear projection (b, h*w, embedding_dim=256)
+Labels -> Tokeniser -> Generated Embedding
+CaptionModel - Decoder -> CrossAttention(Image Features + SelfAttention(Generated Text Embeddings))
